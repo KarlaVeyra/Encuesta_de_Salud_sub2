@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta de Salud</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .contenedor{
+            width: 400px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h1{
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        label{
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        input, select{
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="range"]{
+            width: 100%;
+        }
+
+        .btn{
+            margin-top: 20px;
+            width: 100%;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover{
+            background: #2980b9;
+        }
+
+        .valor{
+            text-align: center;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h1>Encuesta de Salud</h1>
+
+        <form>
+
+            <!-- Actividad 1 -->
+
+            <label>Edad</label>
+            <input type="number" min="1" max="120" placeholder="Ingrese su edad" required>
+
+            <label>Peso (kg)</label>
+            <input type="number" min="20" max="300" placeholder="Ingrese su peso" required>
+
+            <label>Nivel de dolor</label>
+            <input type="range" min="0" max="10" value="5" id="dolor"
+            oninput="valorDolor.innerHTML = this.value">
+
+            <p class="valor">Nivel: <span id="valorDolor">5</span></p>
+
+            <label>Tipo de sangre</label>
+            <select required>
+                <option value="">Seleccione</option>
+                <option>A+</option>
+                <option>A-</option>
+                <option>B+</option>
+                <option>B-</option>
+                <option>AB+</option>
+                <option>AB-</option>
+                <option>O+</option>
+                <option>O-</option>
+            </select>
+
+            <!-- Actividad 2 -->
+
+            <label>Código Postal</label>
+            <input 
+                type="text" 
+                pattern="[0-9]{5}" 
+                maxlength="5"
+                placeholder="Ejemplo: 77500"
+                required>
+
+            <button type="submit" class="btn">
+                Enviar Encuesta
+            </button>
+
+        </form>
+    </div>
+
+</body>
+</html>
