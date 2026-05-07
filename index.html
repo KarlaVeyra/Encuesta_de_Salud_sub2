@@ -6,92 +6,159 @@
     <title>Encuesta de Salud</title>
 
     <style>
-        body{
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
+        *{
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #0f4c81, #4facfe);
         }
 
         .contenedor{
-            width: 400px;
-            margin: 40px auto;
+            width: 420px;
             background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
         }
 
         h1{
             text-align: center;
-            color: #2c3e50;
+            color: #0f4c81;
+            margin-bottom: 10px;
+        }
+
+        .subtitulo{
+            text-align: center;
+            color: gray;
+            margin-bottom: 25px;
+            font-size: 14px;
         }
 
         label{
-            font-weight: bold;
             display: block;
             margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            color: #333;
         }
 
-        input, select{
+        input,
+        select{
             width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
+            padding: 12px;
             border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        input:focus,
+        select:focus{
+            border-color: #4facfe;
+            outline: none;
+            box-shadow: 0 0 8px rgba(79,172,254,0.4);
         }
 
         input[type="range"]{
-            width: 100%;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .nivel{
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #0f4c81;
         }
 
         .btn{
-            margin-top: 20px;
             width: 100%;
-            background: #3498db;
-            color: white;
+            margin-top: 25px;
+            padding: 14px;
             border: none;
-            padding: 12px;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #0f4c81, #4facfe);
+            color: white;
             font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
         }
 
         .btn:hover{
-            background: #2980b9;
+            transform: scale(1.03);
+            opacity: 0.95;
         }
 
-        .valor{
+        .mensaje{
+            margin-top: 20px;
             text-align: center;
+            color: green;
             font-weight: bold;
-            color: #e74c3c;
+            display: none;
+            background: #eafbea;
+            padding: 12px;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
     <div class="contenedor">
+
         <h1>Encuesta de Salud</h1>
+        <p class="subtitulo">
+            Complete el siguiente formulario médico
+        </p>
 
-        <form>
+        <form id="formulario">
 
-            <!-- Actividad 1 -->
+            <!-- ACTIVIDAD 1 -->
 
             <label>Edad</label>
-            <input type="number" min="1" max="120" placeholder="Ingrese su edad" required>
+            <input 
+                type="number" 
+                min="1" 
+                max="120"
+                placeholder="Ingrese su edad"
+                required
+            >
 
             <label>Peso (kg)</label>
-            <input type="number" min="20" max="300" placeholder="Ingrese su peso" required>
+            <input 
+                type="number"
+                min="20"
+                max="300"
+                placeholder="Ingrese su peso"
+                required
+            >
 
             <label>Nivel de dolor</label>
-            <input type="range" min="0" max="10" value="5" id="dolor"
-            oninput="valorDolor.innerHTML = this.value">
+            <input 
+                type="range"
+                min="0"
+                max="10"
+                value="5"
+                id="dolor"
+                oninput="valor.innerHTML=this.value"
+            >
 
-            <p class="valor">Nivel: <span id="valorDolor">5</span></p>
+            <p class="nivel">
+                Nivel: <span id="valor">5</span>
+            </p>
 
             <label>Tipo de sangre</label>
             <select required>
-                <option value="">Seleccione</option>
+                <option value="">Seleccione una opción</option>
                 <option>A+</option>
                 <option>A-</option>
                 <option>B+</option>
@@ -102,22 +169,43 @@
                 <option>O-</option>
             </select>
 
-            <!-- Actividad 2 -->
+            <!-- ACTIVIDAD 2 -->
 
             <label>Código Postal</label>
             <input 
-                type="text" 
-                pattern="[0-9]{5}" 
+                type="text"
+                pattern="[0-9]{5}"
                 maxlength="5"
                 placeholder="Ejemplo: 77500"
-                required>
+                required
+            >
 
             <button type="submit" class="btn">
                 Enviar Encuesta
             </button>
 
         </form>
+
+        <div class="mensaje" id="mensaje">
+            ✔️ La encuesta se envió correctamente
+        </div>
+
     </div>
+
+    <script>
+        const formulario = document.getElementById("formulario");
+        const mensaje = document.getElementById("mensaje");
+
+        formulario.addEventListener("submit", function(e){
+            e.preventDefault();
+
+            mensaje.style.display = "block";
+
+            formulario.reset();
+
+            document.getElementById("valor").innerHTML = "5";
+        });
+    </script>
 
 </body>
 </html>
